@@ -1,5 +1,5 @@
 """Generate Markov text from text files."""
-
+import sys
 from random import choice
 
 
@@ -10,11 +10,11 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
+    with open(sys.argv[1]) as text_file:
+        text_file = text_file.read().split()
+        return text_file
 
-    return "Contents of your file as one long string"
-
-
+  
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
 
@@ -40,10 +40,16 @@ def make_chains(text_string):
         [None]
     """
 
+    text_string = open_and_read_file(sys.argv[1])
     chains = {}
+    i = 0
 
-    # your code goes here
-
+    while i in range(len(text_string) -1):
+        bigram = (text_string[i] + ' ' + text_string[i + 1])
+        bigram_value = text_string[i+2:i+3]
+        chains[bigram] = bigram_value
+        i = i + 1
+    
     return chains
 
 
